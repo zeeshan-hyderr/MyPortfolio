@@ -35,7 +35,7 @@ portfolio/
 - A free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) cluster
 - A free [Cloudinary](https://cloudinary.com/users/register/free) account
 - A [GitHub](https://github.com) account (for deployment)
-- Free accounts on [Render](https://render.com) (backend) and [Vercel](https://vercel.com) or [Netlify](https://netlify.com) (frontend)
+- Free accounts on [Render](https://render.com) (backend) and [Vercel](https://vercel.com) (frontend)
 
 ## 2. Local Setup
 
