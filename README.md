@@ -104,6 +104,7 @@ Before deploying, make sure `server/.env` and `client/.env` stay local only. The
 3. Add environment variable `VITE_API_URL` = `https://your-api.onrender.com/api`
 4. Deploy. You'll get a URL like `https://your-portfolio.vercel.app`.
 5. Go back to Render and update `CLIENT_URL` to this exact URL (for CORS), then redeploy the backend. If you keep local dev working against the same backend, use a comma-separated allowlist.
+6. Keep [client/vercel.json](client/vercel.json) in the repo so direct refreshes on routes like `/admin/login` and `/about` are rewritten to the single-page app instead of returning Vercel's `NOT_FOUND` page.
 
 ### Free-tier note
 
