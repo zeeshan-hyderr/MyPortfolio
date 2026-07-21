@@ -91,7 +91,7 @@ No extra configuration needed — just copy the **Cloud Name**, **API Key**, and
 1. Push this repo to GitHub.
 2. On Render, create a **New Web Service**, pointing at the `server` folder (Root Directory: `server`).
 3. Build command: `npm install`  ·  Start command: `npm start`
-4. Add all the same environment variables from your local `.env` in Render's **Environment** tab, but set `CLIENT_URL` to your future Vercel/Netlify URL.
+4. Add all the same environment variables from your local `.env` in Render's **Environment** tab, but set `CLIENT_URL` to your production frontend URL. If you want to allow both local dev and production from the same backend, separate them with commas in `CLIENT_URL`.
 5. Deploy. Render gives you a URL like `https://your-api.onrender.com`.
 6. Run the seed script once, either via Render's shell (`npm run seed`) or by running it locally against your Atlas cluster before deploying.
 
@@ -103,7 +103,7 @@ Before deploying, make sure `server/.env` and `client/.env` stay local only. The
 2. Build command: `npm run build`  ·  Output directory: `dist`
 3. Add environment variable `VITE_API_URL` = `https://your-api.onrender.com/api`
 4. Deploy. You'll get a URL like `https://your-portfolio.vercel.app`.
-5. Go back to Render and update `CLIENT_URL` to this exact URL (for CORS), then redeploy the backend.
+5. Go back to Render and update `CLIENT_URL` to this exact URL (for CORS), then redeploy the backend. If you keep local dev working against the same backend, use a comma-separated allowlist.
 
 ### Free-tier note
 
