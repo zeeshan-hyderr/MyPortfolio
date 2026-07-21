@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import api from "../api/axios";
+import { resolvePublicEmail } from "../utils/publicContact";
 
 const Contact = () => {
   const [info, setInfo] = useState(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
+  const email = resolvePublicEmail(info?.email);
 
   useEffect(() => {
     api.get("/contact/info").then((res) => setInfo(res.data));
@@ -36,9 +38,9 @@ const Contact = () => {
 
       <div className="grid md:grid-cols-[1fr_1.3fr] gap-8 mt-10">
         <div className="card h-fit space-y-4">
-          {info?.email && (
-            <a href={`mailto:${info.email}`} className="flex items-center gap-3 text-sm text-ink-muted hover:text-accent-cyan">
-              <FaEnvelope /> {info.email}
+          {email && (
+            <a href={`mailto:${email}`} className="flex items-center gap-3 text-sm text-ink-muted hover:text-accent-cyan">
+              <FaEnvelope /> {email}
             </a>
           )}
           {info?.phone && (

@@ -9,6 +9,7 @@ import HomeSectionHeading from "../components/HomeSectionHeading";
 import FeaturedProjectCard from "../components/FeaturedProjectCard";
 import SkillPill from "../components/SkillPill";
 import AnimatedCounter from "../components/AnimatedCounter";
+import { resolvePublicEmail } from "../utils/publicContact";
 
 const heroTypeText = "const engineer = buildFullStackSolutions();";
 
@@ -94,6 +95,7 @@ const Home = () => {
   const profileImage = about?.profilePicture?.url || profileFallback;
   const intro = about?.summary || "I build reliable web applications and polished digital experiences from idea to deployment.";
   const introSnippet = intro.length > 320 ? `${intro.slice(0, 320).trim()}...` : intro;
+  const publicEmail = resolvePublicEmail(about?.socialLinks?.email);
 
   if (loading) return <HomeSkeleton />;
 
@@ -165,9 +167,9 @@ const Home = () => {
                   <FaLinkedin />
                 </a>
               )}
-              {about?.socialLinks?.email && (
+              {publicEmail && (
                 <a
-                  href={`mailto:${about.socialLinks.email}`}
+                  href={`mailto:${publicEmail}`}
                   className="hover:text-accent-cyan transition-colors"
                   aria-label="Email"
                 >
