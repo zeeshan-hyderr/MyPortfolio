@@ -5,6 +5,7 @@ import {
   HiOutlineFolder,
   HiOutlineLightningBolt,
   HiOutlineUser,
+  HiOutlineBadgeCheck,
   HiOutlineMail,
   HiOutlineChatAlt,
   HiOutlineLogout,
@@ -14,6 +15,7 @@ import { useAuth } from "../../context/AuthContext";
 const links = [
   { to: "/admin", label: "Overview", icon: HiOutlineViewGrid, end: true },
   { to: "/admin/projects", label: "Projects", icon: HiOutlineFolder },
+  { to: "/admin/certifications", label: "Certifications", icon: HiOutlineBadgeCheck },
   { to: "/admin/skills", label: "Skills", icon: HiOutlineLightningBolt },
   { to: "/admin/about", label: "About", icon: HiOutlineUser },
   { to: "/admin/contact", label: "Contact Info", icon: HiOutlineMail },

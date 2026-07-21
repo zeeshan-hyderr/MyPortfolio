@@ -9,6 +9,7 @@ import projectRoutes from "./routes/projectRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
 import aboutRoutes from "./routes/aboutRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import certificationRoutes from "./routes/certificationRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -44,6 +45,7 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/about", aboutRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/certifications", certificationRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -11,10 +11,10 @@ cloudinary.config({
 });
 
 // Upload a buffer (from multer memory storage) to Cloudinary
-export const uploadBufferToCloudinary = (buffer, folder = "portfolio") => {
+export const uploadBufferToCloudinary = (buffer, folder = "portfolio", resourceType = "image") => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
-      { folder, resource_type: "image" },
+      { folder, resource_type: resourceType },
       (error, result) => {
         if (result) resolve(result);
         else reject(error);
@@ -24,10 +24,10 @@ export const uploadBufferToCloudinary = (buffer, folder = "portfolio") => {
   });
 };
 
-export const deleteFromCloudinary = async (publicId) => {
+export const deleteFromCloudinary = async (publicId, resourceType = "image") => {
   if (!publicId) return;
   try {
-    await cloudinary.uploader.destroy(publicId);
+    await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
   } catch (err) {
     console.error("Cloudinary delete error:", err.message);
   }

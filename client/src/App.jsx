@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
+import Certifications from "./pages/Certifications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -18,6 +19,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./pages/admin/DashboardLayout";
 import DashboardHome from "./pages/admin/DashboardHome";
 import ManageProjects from "./pages/admin/ManageProjects";
+import ManageCertifications from "./pages/admin/ManageCertifications";
 import ManageSkills from "./pages/admin/ManageSkills";
 import ManageAbout from "./pages/admin/ManageAbout";
 import ManageContact from "./pages/admin/ManageContact";
@@ -47,6 +49,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/skills" element={<Skills />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/certifications" element={<Certifications />} />
         <Route path="/contact" element={<Contact />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -60,6 +63,7 @@ function App() {
         >
           <Route index element={<DashboardHome />} />
           <Route path="projects" element={<ManageProjects />} />
+          <Route path="certifications" element={<ManageCertifications />} />
           <Route path="skills" element={<ManageSkills />} />
           <Route path="about" element={<ManageAbout />} />
           <Route path="contact" element={<ManageContact />} />
