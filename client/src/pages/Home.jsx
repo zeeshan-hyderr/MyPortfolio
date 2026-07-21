@@ -7,6 +7,8 @@ import profileFallback from "../assets/profile.jpg";
 import HomeSkeleton from "../components/HomeSkeleton";
 import HomeSectionHeading from "../components/HomeSectionHeading";
 import FeaturedProjectCard from "../components/FeaturedProjectCard";
+import CertificationCard from "../components/CertificationCard";
+import CertificationModal from "../components/CertificationModal";
 import SkillPill from "../components/SkillPill";
 import AnimatedCounter from "../components/AnimatedCounter";
 import { resolvePublicEmail } from "../utils/publicContact";
@@ -17,8 +19,10 @@ const Home = () => {
   const [about, setAbout] = useState(null);
   const [skills, setSkills] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [certifications, setCertifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [typed, setTyped] = useState("");
+  const [activeCertification, setActiveCertification] = useState(null);
 
   useEffect(() => {
     let mounted = true;
@@ -27,10 +31,11 @@ const Home = () => {
       setLoading(true);
 
       try {
-        const [aboutRes, skillsRes, projectsRes] = await Promise.all([
+        const [aboutRes, skillsRes, projectsRes, certificationsRes] = await Promise.all([
           api.get("/about"),
           api.get("/skills"),
           api.get("/projects"),
+          api.get("/certifications"),
         ]);
 
         if (!mounted) return;
@@ -38,11 +43,13 @@ const Home = () => {
         setAbout(aboutRes.data);
         setSkills(skillsRes.data || []);
         setProjects(projectsRes.data || []);
+        setCertifications(certificationsRes?.data || []);
       } catch {
         if (!mounted) return;
         setAbout(null);
         setSkills([]);
         setProjects([]);
+        setCertifications([]);
       } finally {
         if (mounted) setLoading(false);
       }
@@ -75,6 +82,14 @@ const Home = () => {
     const featured = sorted.filter((project) => project.featured);
     return (featured.length >= 3 ? featured : sorted).slice(0, 3);
   }, [projects]);
+
+  const featuredCertifications = useMemo(() => {
+    const sorted = [...certifications].sort(
+      (a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
+    );
+    const featured = sorted.filter((certification) => certification.featured);
+    return (featured.length >= 3 ? featured : sorted).slice(0, 3);
+  }, [certifications]);
 
   const stats = useMemo(() => {
     const totalProjects = projects.length;
@@ -274,6 +289,35 @@ const Home = () => {
       </section>
 
       <section className="pb-20 container-app">
+        <HomeSectionHeading
+          eyebrow="Certifications"
+          title="Recent credentials"
+          description="Verified learning and professional certificates managed from the admin panel, shown here automatically when updated."
+          action={
+            <Link to="/certifications" className="btn-outline">
+              View All Certifications
+            </Link>
+          }
+        />
+
+        {featuredCertifications.length > 0 ? (
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {featuredCertifications.map((certification) => (
+              <CertificationCard
+                key={certification._id}
+                certification={certification}
+                onOpen={setActiveCertification}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="card text-center py-10">
+            <p className="text-ink-muted">No certifications have been added yet.</p>
+          </div>
+        )}
+      </section>
+
+      <section className="pb-20 container-app">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -303,6 +347,8 @@ const Home = () => {
           </div>
         </motion.div>
       </section>
+
+      <CertificationModal certification={activeCertification} onClose={() => setActiveCertification(null)} />
     </>
   );
 };
