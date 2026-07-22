@@ -29,10 +29,11 @@ const ProjectModal = ({ project, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-5 md:right-5 h-11 w-11 rounded-full grid place-items-center bg-black/55 border border-white/10 text-white hover:bg-black/75 hover:border-white/20 transition-colors shadow-lg z-10"
+              className="absolute top-4 right-4 md:top-5 md:right-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-2.5 border border-white/20 text-white hover:bg-white/15 hover:border-white/30 transition-colors shadow-[0_10px_30px_rgba(0,0,0,0.35)] z-20"
               aria-label="Close project details"
             >
-              <HiX className="text-xl" />
+              <HiX className="text-2xl" />
+              <span className="hidden md:inline text-xs font-semibold uppercase tracking-[0.18em]">Close</span>
             </button>
 
             <div className="flex items-start justify-between gap-4 mb-4 md:mb-6 pr-14">
