@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import TechBadge from "./TechBadge";
 
-const FeaturedProjectCard = ({ project }) => {
+const FeaturedProjectCard = ({ project, onOpen }) => {
   const imageUrl = project?.featuredImage?.url?.trim();
 
   return (
@@ -12,7 +12,20 @@ const FeaturedProjectCard = ({ project }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.45 }}
-      className="card group flex flex-col overflow-hidden"
+      className={`card group flex flex-col overflow-hidden ${onOpen ? "cursor-pointer" : ""}`}
+      onClick={onOpen ? () => onOpen(project) : undefined}
+      role={onOpen ? "button" : undefined}
+      tabIndex={onOpen ? 0 : undefined}
+      onKeyDown={
+        onOpen
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onOpen(project);
+              }
+            }
+          : undefined
+      }
     >
       <div className="rounded-xl overflow-hidden bg-black/20 aspect-video">
         {imageUrl ? (
@@ -49,6 +62,7 @@ const FeaturedProjectCard = ({ project }) => {
               href={project.githubLink}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="text-ink-muted hover:text-accent-cyan text-sm inline-flex items-center gap-1.5"
             >
               <FaGithub /> GitHub
@@ -59,6 +73,7 @@ const FeaturedProjectCard = ({ project }) => {
               href={project.liveLink}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="text-ink-muted hover:text-accent-cyan text-sm inline-flex items-center gap-1.5"
             >
               <FaExternalLinkAlt /> Live Demo

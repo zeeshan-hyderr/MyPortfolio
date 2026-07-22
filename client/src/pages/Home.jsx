@@ -9,6 +9,7 @@ import HomeSectionHeading from "../components/HomeSectionHeading";
 import FeaturedProjectCard from "../components/FeaturedProjectCard";
 import CertificationCard from "../components/CertificationCard";
 import CertificationModal from "../components/CertificationModal";
+import ProjectModal from "../components/ProjectModal";
 import SkillPill from "../components/SkillPill";
 import AnimatedCounter from "../components/AnimatedCounter";
 import { resolvePublicEmail } from "../utils/publicContact";
@@ -22,6 +23,7 @@ const Home = () => {
   const [certifications, setCertifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [typed, setTyped] = useState("");
+  const [activeProject, setActiveProject] = useState(null);
   const [activeCertification, setActiveCertification] = useState(null);
 
   useEffect(() => {
@@ -283,7 +285,7 @@ const Home = () => {
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
-            <FeaturedProjectCard key={project._id} project={project} />
+            <FeaturedProjectCard key={project._id} project={project} onOpen={setActiveProject} />
           ))}
         </div>
       </section>
@@ -348,6 +350,7 @@ const Home = () => {
         </motion.div>
       </section>
 
+      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
       <CertificationModal certification={activeCertification} onClose={() => setActiveCertification(null)} />
     </>
   );

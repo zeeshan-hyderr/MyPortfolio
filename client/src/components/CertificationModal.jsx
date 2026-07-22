@@ -24,10 +24,19 @@ const CertificationModal = ({ certification, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="glass rounded-2xl w-full max-w-6xl my-8 p-4 md:p-6 lg:p-8"
+            className="glass relative rounded-2xl w-full max-w-6xl my-8 p-4 md:p-6 lg:p-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-4 mb-4 md:mb-6">
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute top-4 right-4 md:top-5 md:right-5 h-11 w-11 rounded-full grid place-items-center bg-black/55 border border-white/10 text-white hover:bg-black/75 hover:border-white/20 transition-colors shadow-lg z-10"
+              aria-label="Close certification details"
+            >
+              <HiX className="text-xl" />
+            </button>
+
+            <div className="flex items-start justify-between gap-4 mb-4 md:mb-6 pr-14">
               <div>
                 <span className="eyebrow">// {certification.category}</span>
                 <h2 className="font-display font-semibold text-2xl md:text-3xl text-white mt-1">
@@ -35,13 +44,6 @@ const CertificationModal = ({ certification, onClose }) => {
                 </h2>
                 <p className="text-ink-muted mt-2">{certification.organization}</p>
               </div>
-              <button
-                onClick={onClose}
-                className="text-ink-muted hover:text-white text-2xl shrink-0"
-                aria-label="Close"
-              >
-                <HiX />
-              </button>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
