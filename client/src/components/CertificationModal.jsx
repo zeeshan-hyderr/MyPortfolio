@@ -55,17 +55,17 @@ const CertificationModal = ({ certification, onClose }) => {
                       <iframe
                         src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=0`}
                         title={certification.title}
-                        className="w-full aspect-[4/3] lg:aspect-[5/4] border-0"
+                        className="w-full aspect-[16/10] lg:aspect-[16/9] border-0"
                       />
                     ) : (
                       <img
                         src={previewUrl}
                         alt={certification.title}
-                        className="w-full aspect-[4/3] lg:aspect-[5/4] object-cover object-center"
+                        className="w-full aspect-[16/10] lg:aspect-[16/9] object-cover object-center"
                       />
                     )
                   ) : (
-                    <div className="w-full aspect-[4/3] lg:aspect-[5/4] grid place-items-center bg-base-surface text-ink-muted text-sm">
+                    <div className="w-full aspect-[16/10] lg:aspect-[16/9] grid place-items-center bg-base-surface text-ink-muted text-sm">
                       No certificate preview available
                     </div>
                   )}

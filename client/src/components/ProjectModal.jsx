@@ -52,10 +52,10 @@ const ProjectModal = ({ project, onClose }) => {
                     <img
                       src={featuredImage}
                       alt={project.title}
-                      className="w-full aspect-[4/3] lg:aspect-[5/4] object-cover"
+                      className="w-full aspect-[16/10] lg:aspect-[16/9] object-cover"
                     />
                   ) : (
-                    <div className="w-full aspect-[4/3] lg:aspect-[5/4] grid place-items-center bg-base-surface text-ink-muted text-sm">
+                    <div className="w-full aspect-[16/10] lg:aspect-[16/9] grid place-items-center bg-base-surface text-ink-muted text-sm">
                       No featured image available
                     </div>
                   )}
